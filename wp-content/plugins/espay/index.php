@@ -464,14 +464,14 @@ function woocommerce_espay_init() {
 	        	<label for="espayproduct-<?=$valJsonPost->productCode;?>" style="display: inline;"> 
 	        		<?//=$valJsonPost->productName?>
 					<?php 
-//					$src = "https://secure.sgo.co.id/images/products/".$valJsonPost->productCode.".png";
+//					$src = "https://kit.espay.id/images/products/".$valJsonPost->productCode.".png";
 //					echo '<img src="' .$src.'" alt="' . esc_attr__('', 'woocommerce' ) . '" height="' . esc_attr( $image_size[1] ) . '" width="' . esc_attr( $image_size[0] ) . '" style="vertical-align:middle; margin-right: 10px;" />';
 //					echo 'Payment using '.$valJsonPost->productName ;
 					?>
 					<input type="radio" class="input-radio" name="espayproduct" id="espayproduct-<?=$valJsonPost->productCode;?>" value='{"productName":"<?=$valJsonPost->productName?>","bankCode":"<?=$valJsonPost->bankCode?>","productCode":"<?=$valJsonPost->productCode?>"}'>
 	        		<?php 
 					echo'
-				   		<img align="middle" src="https://secure.sgo.co.id/images/products/'.$valJsonPost->productCode.'.png" width="100" height="90" style="border-radius:30px;background:#7dd4e1;padding:15px;border:4px solid #fff;"/>
+				   		<img align="middle" src="https://kit.espay.id/images/products/'.$valJsonPost->productCode.'.png" width="100" height="90" style="border-radius:30px;background:#7dd4e1;padding:15px;border:4px solid #fff;"/>
 						Payment Using '.$valJsonPost->productName.'';
 					?>
 					
@@ -875,9 +875,9 @@ function woocommerce_espay_init() {
             		$order->reduce_order_stock();
 					WC()->cart->empty_cart();
 //					$order->add_order_note( __( 'Menunggu pembayaran melalui espay via '.$productName.' dengan id transaksi '.$_REQUEST['trx_id'], 'woocommerce' ) );
-//            	https://secure.sgo.co.id/public/signature/js //production
-//	            http://secure-dev.sgo.co.id/public/signature/js //development
-				$urlserver = $this->environment == 'production'? 'https://secure.sgo.co.id/public/signature/js' : 'http://secure-dev.sgo.co.id/public/signature/js';
+//            	https://kit.espay.id/public/signature/js //production
+//	            https://sandbox-kit.espay.id/public/signature/js //development
+				$urlserver = $this->environment == 'production'? 'https://kit.espay.id/public/signature/js' : 'https://sandbox-kit.espay.id/public/signature/js';
 				?>
 	            <script type="text/javascript" src="<?=$urlserver?>"></script>
 	        	<script type="text/javascript">
