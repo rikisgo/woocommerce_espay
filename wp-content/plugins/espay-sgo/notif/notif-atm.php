@@ -17,17 +17,17 @@ $order_id = (!empty($_REQUEST['order']) ? $_REQUEST['order'] : '');
 $meta_key = '_order_total';
 $meta_key_curr = '_order_currency';
 
-$_order_id = mysql_escape_string($order_id);
+$_order_id = $order_id;
 
 $sql = "SELECT {$_prefix}woocommerce_order_items.order_id, {$_prefix}posts.ID, {$_prefix}posts.post_status, {$_prefix}posts.post_date, {$_prefix}posts.post_password, {$_prefix}postmeta.post_id, {$_prefix}postmeta.meta_key, {$_prefix}postmeta.meta_value
 FROM {$_prefix}woocommerce_order_items
 JOIN {$_prefix}posts ON {$_prefix}woocommerce_order_items.order_id={$_prefix}posts.ID
 JOIN {$_prefix}postmeta ON {$_prefix}woocommerce_order_items.order_id={$_prefix}postmeta.post_id
-where 
-{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "' 
-and 
-{$_prefix}postmeta.post_id = '" . $_order_id . "' 
-and 
+where
+{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "'
+and
+{$_prefix}postmeta.post_id = '" . $_order_id . "'
+and
 {$_prefix}postmeta.meta_key in('_order_currency')
 ";
 $results = $wpdb->get_results($sql);
@@ -36,11 +36,11 @@ $sql1 = "SELECT {$_prefix}woocommerce_order_items.order_id, {$_prefix}posts.ID, 
 FROM {$_prefix}woocommerce_order_items
 JOIN {$_prefix}posts ON {$_prefix}woocommerce_order_items.order_id={$_prefix}posts.ID
 JOIN {$_prefix}postmeta ON {$_prefix}woocommerce_order_items.order_id={$_prefix}postmeta.post_id
-where 
-{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "' 
-and 
-{$_prefix}postmeta.post_id = '" . $_order_id . "' 
-and 
+where
+{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "'
+and
+{$_prefix}postmeta.post_id = '" . $_order_id . "'
+and
 {$_prefix}postmeta.meta_key in('_order_total')
 ";
 $results1 = $wpdb->get_results($sql1);
@@ -49,11 +49,11 @@ $sql2 = "SELECT {$_prefix}woocommerce_order_items.order_id, {$_prefix}posts.ID, 
 FROM {$_prefix}woocommerce_order_items
 JOIN {$_prefix}posts ON {$_prefix}woocommerce_order_items.order_id={$_prefix}posts.ID
 JOIN {$_prefix}postmeta ON {$_prefix}woocommerce_order_items.order_id={$_prefix}postmeta.post_id
-where 
-{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "' 
-and 
-{$_prefix}postmeta.post_id = '" . $_order_id . "' 
-and 
+where
+{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "'
+and
+{$_prefix}postmeta.post_id = '" . $_order_id . "'
+and
 {$_prefix}postmeta.meta_key in('_billing_first_name')
 ";
 $results2 = $wpdb->get_results($sql2);
@@ -62,11 +62,11 @@ $sql3 = "SELECT {$_prefix}woocommerce_order_items.order_id, {$_prefix}posts.ID, 
 FROM {$_prefix}woocommerce_order_items
 JOIN {$_prefix}posts ON {$_prefix}woocommerce_order_items.order_id={$_prefix}posts.ID
 JOIN {$_prefix}postmeta ON {$_prefix}woocommerce_order_items.order_id={$_prefix}postmeta.post_id
-where 
-{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "' 
-and 
-{$_prefix}postmeta.post_id = '" . $_order_id . "' 
-and 
+where
+{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "'
+and
+{$_prefix}postmeta.post_id = '" . $_order_id . "'
+and
 {$_prefix}postmeta.meta_key in('_payment_method_title')
 ";
 $results3 = $wpdb->get_results($sql3);
@@ -105,11 +105,11 @@ $amount = $results1[0]->meta_value;
 ?>
 <?php
 if ($order_id_ori && $post_status == 'wc-completed') {
-    
+
 } elseif ($order_id_ori && $post_status == 'wc-processing') {
-    
+
 } elseif ($order_id_ori && $post_status == 'wc-cancelled') {
-    
+
 } else {
     ?>
     <?= get_header(); ?>
@@ -131,7 +131,7 @@ if ($order_id_ori && $post_status == 'wc-completed') {
         <div id="primary" class="site-content" style="align">
             <div class="entry-content">
                 <B><H4><img src="success.png">  Hi...... </b> </H4> </B><hr>
-                Order kamu telah kami terima! Kami harap kamu dapat menggunakan produk yang dipesan secepatnya dengan 
+                Order kamu telah kami terima! Kami harap kamu dapat menggunakan produk yang dipesan secepatnya dengan
                 melakukan pembayaran via <u><?= $paymentmethod; ?></u>.
                 <br><br>
                 <a href='<?= $myaccount_page_url ?>' title='selengkapnya'>Nomor Order/Id # Anda</a> : <font color="red"><?= $_REQUEST['order'] ?> </font><br>
@@ -141,10 +141,10 @@ if ($order_id_ori && $post_status == 'wc-completed') {
                 </form>
             </div>
         </div>
-    </div>	  
+    </div>
 
     <?php
     //  get_sidebar();
     echo get_footer();
     ?>
-<?php } ?>					
+<?php } ?>

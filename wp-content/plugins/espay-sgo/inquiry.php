@@ -25,17 +25,17 @@ $signatureKeyRest = hash('sha256', $uppercase);
 $meta_key = '_order_total';
 $meta_key_curr = '_order_currency';
 
-$_order_id = mysql_escape_string($order_id);
+$_order_id = $order_id;
 
 $sql = "SELECT {$_prefix}woocommerce_order_items.order_id, {$_prefix}posts.ID, {$_prefix}posts.post_status, {$_prefix}posts.post_date, {$_prefix}postmeta.post_id, {$_prefix}postmeta.meta_key, {$_prefix}postmeta.meta_value
 FROM {$_prefix}woocommerce_order_items
 JOIN {$_prefix}posts ON {$_prefix}woocommerce_order_items.order_id={$_prefix}posts.ID
 JOIN {$_prefix}postmeta ON {$_prefix}woocommerce_order_items.order_id={$_prefix}postmeta.post_id
-where 
-{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "' 
-and 
-{$_prefix}postmeta.post_id = '" . $_order_id . "' 
-and 
+where
+{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "'
+and
+{$_prefix}postmeta.post_id = '" . $_order_id . "'
+and
 {$_prefix}postmeta.meta_key in('_order_currency')
 ";
 $results = $wpdb->get_results($sql);
@@ -44,11 +44,11 @@ $sql1 = "SELECT {$_prefix}woocommerce_order_items.order_id, {$_prefix}posts.ID, 
 FROM {$_prefix}woocommerce_order_items
 JOIN {$_prefix}posts ON {$_prefix}woocommerce_order_items.order_id={$_prefix}posts.ID
 JOIN {$_prefix}postmeta ON {$_prefix}woocommerce_order_items.order_id={$_prefix}postmeta.post_id
-where 
-{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "' 
-and 
-{$_prefix}postmeta.post_id = '" . $_order_id . "' 
-and 
+where
+{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "'
+and
+{$_prefix}postmeta.post_id = '" . $_order_id . "'
+and
 {$_prefix}postmeta.meta_key in('_order_total')
 ";
 $results1 = $wpdb->get_results($sql1);
@@ -57,11 +57,11 @@ $sql2 = "SELECT {$_prefix}woocommerce_order_items.order_id, {$_prefix}posts.ID, 
 FROM {$_prefix}woocommerce_order_items
 JOIN {$_prefix}posts ON {$_prefix}woocommerce_order_items.order_id={$_prefix}posts.ID
 JOIN {$_prefix}postmeta ON {$_prefix}woocommerce_order_items.order_id={$_prefix}postmeta.post_id
-where 
-{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "' 
-and 
-{$_prefix}postmeta.post_id = '" . $_order_id . "' 
-and 
+where
+{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "'
+and
+{$_prefix}postmeta.post_id = '" . $_order_id . "'
+and
 {$_prefix}postmeta.meta_key in('_order_productcode_espay')
 ";
 $results2 = $wpdb->get_results($sql2);
@@ -70,11 +70,11 @@ $sql3 = "SELECT {$_prefix}woocommerce_order_items.order_id, {$_prefix}posts.ID, 
 FROM {$_prefix}woocommerce_order_items
 JOIN {$_prefix}posts ON {$_prefix}woocommerce_order_items.order_id={$_prefix}posts.ID
 JOIN {$_prefix}postmeta ON {$_prefix}woocommerce_order_items.order_id={$_prefix}postmeta.post_id
-where 
-{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "' 
-and 
-{$_prefix}postmeta.post_id = '" . $_order_id . "' 
-and 
+where
+{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "'
+and
+{$_prefix}postmeta.post_id = '" . $_order_id . "'
+and
 {$_prefix}postmeta.meta_key in('_order_creditcardfee_espay')
 ";
 $results3 = $wpdb->get_results($sql3);
@@ -83,11 +83,11 @@ $sql4 = "SELECT {$_prefix}woocommerce_order_items.order_id, {$_prefix}posts.ID, 
 FROM {$_prefix}woocommerce_order_items
 JOIN {$_prefix}posts ON {$_prefix}woocommerce_order_items.order_id={$_prefix}posts.ID
 JOIN {$_prefix}postmeta ON {$_prefix}woocommerce_order_items.order_id={$_prefix}postmeta.post_id
-where 
-{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "' 
-and 
-{$_prefix}postmeta.post_id = '" . $_order_id . "' 
-and 
+where
+{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "'
+and
+{$_prefix}postmeta.post_id = '" . $_order_id . "'
+and
 {$_prefix}postmeta.meta_key in('_order_fee_espay')
 ";
 $results4 = $wpdb->get_results($sql4);
@@ -96,11 +96,11 @@ $sql5 = "SELECT {$_prefix}woocommerce_order_items.order_id, {$_prefix}posts.ID, 
 FROM {$_prefix}woocommerce_order_items
 JOIN {$_prefix}posts ON {$_prefix}woocommerce_order_items.order_id={$_prefix}posts.ID
 JOIN {$_prefix}postmeta ON {$_prefix}woocommerce_order_items.order_id={$_prefix}postmeta.post_id
-where 
-{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "' 
-and 
-{$_prefix}postmeta.post_id = '" . $_order_id . "' 
-and 
+where
+{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "'
+and
+{$_prefix}postmeta.post_id = '" . $_order_id . "'
+and
 {$_prefix}postmeta.meta_key in('_order_total_ori')
 ";
 $results5 = $wpdb->get_results($sql5);

@@ -571,7 +571,7 @@ function woocommerce_espay_init() {
             $redirect = $urlsite . $urlplugin;
 //        	http://116.90.162.173:17122/wordpress-4.4.2/wp-content/plugins/espay-sgo/notif.php?order=20#
 
-            $_order_id_get = mysql_escape_string($order_id_get);
+            $_order_id_get = $order_id_get;
 
             $sql = "SELECT *
 			FROM {$_prefix}postmeta

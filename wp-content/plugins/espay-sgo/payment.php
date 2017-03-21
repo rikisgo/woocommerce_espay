@@ -29,17 +29,17 @@ $signatureKeyRest = hash('sha256', $uppercase);
 $meta_key = '_order_total';
 $meta_key_curr = '_order_currency';
 
-$_order_id = mysql_escape_string($order_id);
+$_order_id = $order_id;
 
 $sql = "SELECT {$_prefix}woocommerce_order_items.order_id, {$_prefix}posts.ID, {$_prefix}posts.post_status, {$_prefix}posts.post_date, {$_prefix}posts.post_password, {$_prefix}postmeta.post_id, {$_prefix}postmeta.meta_key, {$_prefix}postmeta.meta_value
 FROM {$_prefix}woocommerce_order_items
 JOIN {$_prefix}posts ON {$_prefix}woocommerce_order_items.order_id={$_prefix}posts.ID
 JOIN {$_prefix}postmeta ON {$_prefix}woocommerce_order_items.order_id={$_prefix}postmeta.post_id
-where 
-{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "' 
-and 
-{$_prefix}postmeta.post_id = '" . $_order_id . "' 
-and 
+where
+{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "'
+and
+{$_prefix}postmeta.post_id = '" . $_order_id . "'
+and
 {$_prefix}postmeta.meta_key in('_payment_method_title')
 ";
 $results = $wpdb->get_results($sql);
@@ -48,11 +48,11 @@ $sql1 = "SELECT {$_prefix}woocommerce_order_items.order_id, {$_prefix}posts.ID, 
 FROM {$_prefix}woocommerce_order_items
 JOIN {$_prefix}posts ON {$_prefix}woocommerce_order_items.order_id={$_prefix}posts.ID
 JOIN {$_prefix}postmeta ON {$_prefix}woocommerce_order_items.order_id={$_prefix}postmeta.post_id
-where 
-{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "' 
-and 
-{$_prefix}postmeta.post_id = '" . $_order_id . "' 
-and 
+where
+{$_prefix}woocommerce_order_items.order_id = '" . $_order_id . "'
+and
+{$_prefix}postmeta.post_id = '" . $_order_id . "'
+and
 {$_prefix}postmeta.meta_key in('_order_total')
 ";
 $results1 = $wpdb->get_results($sql1);
@@ -99,12 +99,12 @@ if ($passwordAdmin != $passwordServer) {
                 $orderWc->add_order_note(__('Pembayaran telah dilakukan melalui ESPay dengan product ' . $product_code . ' dan referensi pembayaran ' . $payment_ref, 'woocommerce'));
                 $orderWc->payment_complete();
 
-                //	         $payment_method_title = 'ESPay Payment Gateways - '.$product_code; 
+                //	         $payment_method_title = 'ESPay Payment Gateways - '.$product_code;
                 //	         $wpdb->query($wpdb->prepare("UPDATE {$_prefix}postmeta SET meta_value='".$payment_method_title."' WHERE post_id='".$order_id_ori."' and meta_key='_payment_method_title'"));
 
-                $_paymentMethod = mysql_escape_string($paymentMethod);
-                $_paymentMethodReplace = mysql_escape_string($paymentMethodReplace);
-                $_order_id_ori = mysql_escape_string($order_id_ori);
+                $_paymentMethod = $paymentMethod;
+                $_paymentMethodReplace = $paymentMethodReplace;
+                $_order_id_ori = $order_id_ori;
 
                 $sql_prepare = $wpdb->prepare("update {$_prefix}postmeta set meta_value = replace(meta_value,'" . $_paymentMethod . "','" . $_paymentMethodReplace . "') where post_id = '" . $_order_id_ori . "' and meta_key='_payment_method_title'");
 
