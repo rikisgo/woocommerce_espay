@@ -832,7 +832,7 @@ function woocommerce_espay_init() {
         $sql = "SELECT *
 			FROM {$_prefix}postmeta
 			where
-			{$_prefix}postmeta.post_id = '" . mysql_real_escape_string($order_id) . "'
+			{$_prefix}postmeta.post_id = '" . $order_id . "'
 			and
 			{$_prefix}postmeta.meta_key in('_order_total','_order_productcode_espay','_order_fee_espay','_order_creditcardfee_espay','_order_total_ori')
 			";
@@ -911,7 +911,7 @@ function woocommerce_espay_init() {
         $sql = "SELECT *
 			FROM {$_prefix}postmeta
 			where
-			{$_prefix}postmeta.post_id = '" . mysql_real_escape_string($order_id) . "'
+			{$_prefix}postmeta.post_id = '" .$order_id . "'
 			and
 			{$_prefix}postmeta.meta_key in('_order_total')
 			";
@@ -922,7 +922,7 @@ function woocommerce_espay_init() {
         $sql1 = "SELECT *
 			FROM {$_prefix}postmeta
 			where
-			{$_prefix}postmeta.post_id = '" . mysql_real_escape_string($order_id) . "'
+			{$_prefix}postmeta.post_id = '" . $order_id . "'
 			and
 			{$_prefix}postmeta.meta_key in('_order_fee_espay')
 			";
@@ -931,7 +931,7 @@ function woocommerce_espay_init() {
         $sql2 = "SELECT *
 			FROM {$_prefix}postmeta
 			where
-			{$_prefix}postmeta.post_id = '" . mysql_real_escape_string($order_id) . "'
+			{$_prefix}postmeta.post_id = '" . $order_id . "'
 			and
 			{$_prefix}postmeta.meta_key in('_order_creditcardfee_espay')
 			";
@@ -940,7 +940,7 @@ function woocommerce_espay_init() {
         $sql3 = "SELECT *
 			FROM {$_prefix}postmeta
 			where
-			{$_prefix}postmeta.post_id = '" . mysql_real_escape_string($order_id) . "'
+			{$_prefix}postmeta.post_id = '" . $order_id . "'
 			and
 			{$_prefix}postmeta.meta_key in('_order_productcode_espay')
 			";
@@ -1006,7 +1006,7 @@ function woocommerce_espay_init() {
         $sql = "SELECT *
 			FROM {$_prefix}postmeta
 			where
-			{$_prefix}postmeta.post_id = '" . mysql_real_escape_string($order_id) . "'
+			{$_prefix}postmeta.post_id = '" . $order_id . "'
 			and
 			{$_prefix}postmeta.meta_key in('_order_total','_order_productcode_espay','_order_fee_espay','_order_creditcardfee_espay','_payment_method_title')
 			";
