@@ -871,14 +871,14 @@ function woocommerce_espay_init() {
         <tr>
             <td class="label"><?php _e('Subtotal', 'woocommerce'); ?>:</td>
             <td class="total">
-                <?php echo $currency . number_format($amountOriginal, 2); ?>
+                <?php echo $currency . number_format(floatval($amountOriginal), 2); ?>
             </td>
             <td width="1%"></td>
         </tr>
         <tr>
             <td class="label"><?php echo wc_help_tip(__('This is the transaction fee. transaction fee are defined per line item.', 'woocommerce')); ?> <?php _e('Transaction Fee', 'woocommerce'); ?>:</td>
             <td class="total">
-                <?php echo $currency . number_format($fee, 2); ?>
+                <?php echo $currency . number_format(floatval($fee), 2); ?>
             </td>
             <td width="1%"></td>
         </tr>
