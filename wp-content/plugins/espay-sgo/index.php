@@ -428,36 +428,36 @@ function woocommerce_espay_init() {
 
             echo'<h4><b>Online Payment</b></h4>';
 
-			if(empty($callApiProduct)){
+            if (empty($callApiProduct)) {
                 echo 'There\'s something wrong here, please check your api key';
-            }else{
+            } else {
 
-            foreach ($callApiProduct as $value) {
-                $valJson = json_encode($value);
-                $valJsonPost = json_decode($valJson);
+                foreach ($callApiProduct as $value) {
+                    $valJson = json_encode($value);
+                    $valJsonPost = json_decode($valJson);
 
-                $valJsonPost->bankCode;
-                $valJsonPost->productCode;
-                $valJsonPost->productName;
-                ?>
+                    $valJsonPost->bankCode;
+                    $valJsonPost->productCode;
+                    $valJsonPost->productName;
+                    ?>
 
-                                <!--	        	<input type="radio" class="input-radio" name="espayproduct" id="espayproduct-<?= $valJsonPost->productCode; ?>" value='{"productName":"<?= $valJsonPost->productName ?>","bankCode":"<?= $valJsonPost->bankCode ?>","productCode":"<?= $valJsonPost->productCode ?>"}'>-->
-                <label for="espayproduct-<?= $valJsonPost->productCode; ?>" style="display: inline;">
-                    <?php
+                                                                                                                                                                            <!--	        	<input type="radio" class="input-radio" name="espayproduct" id="espayproduct-<?= $valJsonPost->productCode; ?>" value='{"productName":"<?= $valJsonPost->productName ?>","bankCode":"<?= $valJsonPost->bankCode ?>","productCode":"<?= $valJsonPost->productCode ?>"}'>-->
+                    <label for="espayproduct-<?= $valJsonPost->productCode; ?>" style="display: inline;">
+                        <?php
 //					$src = "https://secure.sgo.co.id/images/products/".$valJsonPost->productCode.".png";
 //					echo '<img src="' .$src.'" alt="' . esc_attr__('', 'woocommerce' ) . '" height="' . esc_attr( $image_size[1] ) . '" width="' . esc_attr( $image_size[0] ) . '" style="vertical-align:middle; margin-right: 10px;" />';
 //					echo 'Payment using '.$valJsonPost->productName ;
-                    ?>
-                    <input type="radio" class="input-radio" name="espayproduct" id="espayproduct-<?= $valJsonPost->productCode; ?>" value='{"productName":"<?= $valJsonPost->productName ?>","bankCode":"<?= $valJsonPost->bankCode ?>","productCode":"<?= $valJsonPost->productCode ?>"}'>
-                    <?php
-                    echo'
+                        ?>
+                        <input type="radio" class="input-radio" name="espayproduct" id="espayproduct-<?= $valJsonPost->productCode; ?>" value='{"productName":"<?= $valJsonPost->productName ?>","bankCode":"<?= $valJsonPost->bankCode ?>","productCode":"<?= $valJsonPost->productCode ?>"}'>
+                        <?php
+                        echo'
 				   		<img align="middle" src="https://kit.espay.id/images/products/' . $valJsonPost->productCode . '.png" width="100" height="90" style="border-radius:30px;background:#7dd4e1;padding:15px;border:4px solid #fff;"/>
 						Payment Using ' . $valJsonPost->productName . '';
-                    ?>
+                        ?>
 
-                </label></p>
-                <?php
-				}
+                    </label></p>
+                    <?php
+                }
             }
             ?>
             <div align=center>
@@ -541,7 +541,6 @@ function woocommerce_espay_init() {
         }
 
         public function generate_espay_form($order_id) {
-//            global $woocommerce;
             global $woo_cp, $woocommerce, $wpdb;
 
             $_prefix = $wpdb->prefix;
@@ -552,14 +551,11 @@ function woocommerce_espay_init() {
             $order_id_get = WC()->session->get('order_id_get');
             $espayproduct = stripslashes($espayproductOri);
 
-//			echo '<br>';
-//			echo $str = '{"bankCode":"097","productCode":"MayapadaIb"}';
-
             $valJsonPost = json_decode($espayproduct);
             $productName = $valJsonPost->productName;
             $bankCode = $valJsonPost->bankCode;
             $productCode = $valJsonPost->productCode;
-//        	$redirect = add_query_arg('key', $order->order_key, add_query_arg('order', $_REQUEST['id_order'], get_permalink(woocommerce_get_page_id('thanks'))));
+
             $urlsite = get_site_url();
 
             if ($productCode == 'PERMATAATM' || $productCode == 'MUAMALATATM' || $productCode == 'BIIATM') {
@@ -569,7 +565,6 @@ function woocommerce_espay_init() {
             }
 
             $redirect = $urlsite . $urlplugin;
-//        	http://116.90.162.173:17122/wordpress-4.4.2/wp-content/plugins/espay-sgo/notif.php?order=20#
 
             $_order_id_get = $order_id_get;
 
@@ -580,51 +575,15 @@ function woocommerce_espay_init() {
 			and
 			{$_prefix}postmeta.meta_key in('_order_total','_order_total_ori')
 			";
-            //{$_prefix}postmeta.meta_key = '".$meta_key."'
+
             $results = $wpdb->get_results($sql);
             ?>
             <?php
             if ($productCode == 'CREDITCARD') {
 
-                if ($productCode == 'BCAKLIKPAY') {
-                    $fee = ($this->fee_bca_klikpay == '') ? 0 : $this->fee_bca_klikpay;
-                } elseif ($productCode == 'XLTUNAI') {
-                    $fee = ($this->fee_xl_tunai == '') ? 0 : $this->fee_xl_tunai;
-                } elseif ($productCode == 'BIIATM') {
-                    $fee = ($this->fee_bii_atm == '') ? 0 : $this->fee_bii_atm;
-                } elseif ($productCode == 'BNIDBO') {
-                    $fee = ($this->fee_bnidbo == '') ? 0 : $this->fee_bnidbo;
-                } elseif ($productCode == 'DANAMONOB') {
-                    $fee = ($this->fee_danamon_ob == '') ? 0 : $this->fee_danamon_ob;
-                } elseif ($productCode == 'DKIIB') {
-                    $fee = ($this->fee_dki_ib == '') ? 0 : $this->fee_dki_ib;
-                } elseif ($productCode == 'MANDIRIIB') {
-                    $fee = ($this->fee_mandiri_ib == '') ? 0 : $this->fee_mandiri_ib;
-                } elseif ($productCode == 'MANDIRIECASH') {
-                    $fee = ($this->fee_mandiri_ecash == '') ? 0 : $this->fee_mandiri_ecash;
-                } elseif ($productCode == 'FINPAY195') {
-                    $fee = ($this->fee_finpay == '') ? 0 : $this->fee_finpay;
-                } elseif ($productCode == 'CREDITCARD') {
-                    $fee = ($this->fee_credit_card == '') ? 0 : $this->fee_credit_card;
-                } elseif ($productCode == 'MANDIRISMS') {
-                    $fee = ($this->fee_mandiri_sms == '') ? 0 : $this->fee_mandiri_sms;
-                } elseif ($productCode == 'MAYAPADAIB') {
-                    $fee = ($this->fee_mayapada_ib == '') ? 0 : $this->fee_mayapada_ib;
-                } elseif ($productCode == 'MUAMALATATM') {
-                    $fee = ($this->fee_mualamatatm == '') ? 0 : $this->fee_mualamatatm;
-                } elseif ($productCode == 'NOBUPAY') {
-                    $fee = ($this->fee_nobupay == '') ? 0 : $this->fee_nobupay;
-                } elseif ($productCode == 'PERMATAATM') {
-                    $fee = ($this->fee_permata_atm == '') ? 0 : $this->fee_permata_atm;
-                } else {
-                    $fee = 0;
-                }
-
+                $fee = ($this->fee_credit_card == '') ? 0 : $this->fee_credit_card;
                 $creditcardfee = ($this->creditcardfee == '') ? 0 : $this->creditcardfee;
-//	        	$amount = WC()->cart->cart_contents_total; //ori angka
-//        		rumus
-//				nampilin cc = (((total + fee) *rate%) + total) + fee
-//	            $amount = $results[0]->meta_value; 	//total
+
                 if ($results[1]->meta_value) {
                     $amount = $results[1]->meta_value;
                 } else {
@@ -653,8 +612,6 @@ function woocommerce_espay_init() {
                     $fee = ($this->fee_mandiri_ecash == '') ? 0 : $this->fee_mandiri_ecash;
                 } elseif ($productCode == 'FINPAY195') {
                     $fee = ($this->fee_finpay == '') ? 0 : $this->fee_finpay;
-                } elseif ($productCode == 'CREDITCARD') {
-                    $fee = ($this->fee_credit_card == '') ? 0 : $this->fee_credit_card;
                 } elseif ($productCode == 'MANDIRISMS') {
                     $fee = ($this->fee_mandiri_sms == '') ? 0 : $this->fee_mandiri_sms;
                 } elseif ($productCode == 'MAYAPADAIB') {
@@ -665,30 +622,28 @@ function woocommerce_espay_init() {
                     $fee = ($this->fee_nobupay == '') ? 0 : $this->fee_nobupay;
                 } elseif ($productCode == 'PERMATAATM') {
                     $fee = ($this->fee_permata_atm == '') ? 0 : $this->fee_permata_atm;
+                } elseif ($productCode == 'EPAYBRI') {
+                    $fee = ($this->fee_bri == '') ? 0 : $this->fee_bri;
+                } elseif ($productCode == 'PERMATANETPAY') {
+                    $fee = ($this->fee_permata_net_pay == '') ? 0 : $this->fee_permata_net_pay;
+                } elseif ($productCode == 'BITCOIN') {
+                    $fee = ($this->fee_bitcoin == '') ? 0 : $this->fee_bitcoin;
                 } else {
                     $fee = 0;
                 }
 
                 $creditcardfee = 0;
-//	        	$amount = WC()->cart->cart_contents_total; //ori angka
 
                 if ($results[1]->meta_value) {
                     $amount = $results[1]->meta_value;
                 } else {
                     $amount = $results[0]->meta_value;
                 }
-//		        echo'<pre>';
-//		        var_dump($results);
-//	        	echo'</pre>';
 
                 $totalamount = $amount + $fee;
             }
 
             $currency = get_woocommerce_currency_symbol();
-//            $total = $woocommerce->cart->get_cart_total(); //sudah menggunakan rupiah 55.000
-//	            $amount = WC()->cart->cart_contents_total; //ori angka
-//	            $totalamount = $amount+$fee;
-//            echo number_format($totalamount, 2, '.', '');
             ?>
             <table class="shop_table order_details">
                 <tbody>
@@ -738,7 +693,7 @@ function woocommerce_espay_init() {
                 <?php
             } else {
                 ?>
-                <form method="POST" action="<?php //echo $this->payurl;  ?>">
+                <form method="POST" action="<?php //echo $this->payurl;      ?>">
                     <input type="hidden" name="method" value="<?php echo $method; ?>" />
                     <input type="hidden" name="merchantUUID" value="<?php echo $this->settings['merchant_id']; ?>" />
                     <input type="submit" name="post" class="submit buy button" value="<?php _e('Confirm and Pay', 'woocommerce'); ?>" />
@@ -911,7 +866,7 @@ function woocommerce_espay_init() {
         $sql = "SELECT *
 			FROM {$_prefix}postmeta
 			where
-			{$_prefix}postmeta.post_id = '" .$order_id . "'
+			{$_prefix}postmeta.post_id = '" . $order_id . "'
 			and
 			{$_prefix}postmeta.meta_key in('_order_total')
 			";
