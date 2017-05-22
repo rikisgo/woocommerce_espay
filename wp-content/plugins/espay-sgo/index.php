@@ -74,6 +74,7 @@ function woocommerce_espay_init() {
             $this->fee_mandiri_ecash = $this->settings['fee_mandiri_ecash'];
             $this->fee_credit_card = $this->settings['fee_credit_card'];
             $this->fee_permata_atm = $this->settings['fee_permata_atm'];
+            $this->fee_danamon_atm = $this->settings['fee_danamon_atm'];
             $this->fee_danamon_ob = $this->settings['fee_danamon_ob'];
             $this->fee_dki_ib = $this->settings['fee_dki_ib'];
             $this->fee_xl_tunai = $this->settings['fee_xl_tunai'];
@@ -274,6 +275,14 @@ function woocommerce_espay_init() {
                     'default' => '0',
                     'desc_tip' => true
                 ),
+                'fee_danamon_atm' => array(
+                    'title' => __('Transaction Fee Danamon ATM', 'woocommerce'),
+                    'type' => 'price',
+                    'placeholder' => wc_format_localized_price(0),
+                    'description' => __('', 'woocommerce'),
+                    'default' => '0',
+                    'desc_tip' => true
+                ),
                 'fee_dki_ib' => array(
                     'title' => __('Transaction Fee DKI Internet Banking', 'woocommerce'),
                     'type' => 'price',
@@ -441,7 +450,7 @@ function woocommerce_espay_init() {
                     $valJsonPost->productName;
                     ?>
 
-                                                                                                                                                                            <!--	        	<input type="radio" class="input-radio" name="espayproduct" id="espayproduct-<?= $valJsonPost->productCode; ?>" value='{"productName":"<?= $valJsonPost->productName ?>","bankCode":"<?= $valJsonPost->bankCode ?>","productCode":"<?= $valJsonPost->productCode ?>"}'>-->
+                                                                                                                                                                                                                                                                                <!--	        	<input type="radio" class="input-radio" name="espayproduct" id="espayproduct-<?= $valJsonPost->productCode; ?>" value='{"productName":"<?= $valJsonPost->productName ?>","bankCode":"<?= $valJsonPost->bankCode ?>","productCode":"<?= $valJsonPost->productCode ?>"}'>-->
                     <label for="espayproduct-<?= $valJsonPost->productCode; ?>" style="display: inline;">
                         <?php
 //					$src = "https://secure.sgo.co.id/images/products/".$valJsonPost->productCode.".png";
@@ -558,7 +567,7 @@ function woocommerce_espay_init() {
 
             $urlsite = get_site_url();
 
-            if ($productCode == 'PERMATAATM' || $productCode == 'MUAMALATATM' || $productCode == 'BIIATM') {
+            if ($productCode == 'PERMATAATM' || $productCode == 'MUAMALATATM' || $productCode == 'BIIATM' || $productCode == 'FINPAY195') {
                 $urlplugin = '/wp-content/plugins/espay-sgo/notif/notif-atm.php?order=' . $order_id_get . '';
             } else {
                 $urlplugin = '/wp-content/plugins/espay-sgo/notif/notif-ib.php?order=' . $order_id_get . '';
@@ -626,6 +635,8 @@ function woocommerce_espay_init() {
                     $fee = ($this->fee_bri == '') ? 0 : $this->fee_bri;
                 } elseif ($productCode == 'PERMATANETPAY') {
                     $fee = ($this->fee_permata_net_pay == '') ? 0 : $this->fee_permata_net_pay;
+                } elseif ($productCode == 'DANAMONATM') {
+                    $fee = ($this->fee_danamon_atm == '') ? 0 : $this->fee_danamon_atm;
                 } elseif ($productCode == 'BITCOIN') {
                     $fee = ($this->fee_bitcoin == '') ? 0 : $this->fee_bitcoin;
                 } else {
@@ -693,7 +704,7 @@ function woocommerce_espay_init() {
                 <?php
             } else {
                 ?>
-                <form method="POST" action="<?php //echo $this->payurl;      ?>">
+                <form method="POST" action="<?php //echo $this->payurl;           ?>">
                     <input type="hidden" name="method" value="<?php echo $method; ?>" />
                     <input type="hidden" name="merchantUUID" value="<?php echo $this->settings['merchant_id']; ?>" />
                     <input type="submit" name="post" class="submit buy button" value="<?php _e('Confirm and Pay', 'woocommerce'); ?>" />
